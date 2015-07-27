@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot as Pivot;
  *
  * @author Ronni Egeriis Persson <ronni@egeriis.me>
  */
-class Model extends \Eloquent
+class Model extends \Eloquent implements ModelInterface
 {
     /**
      * Let's guard these fields per default
