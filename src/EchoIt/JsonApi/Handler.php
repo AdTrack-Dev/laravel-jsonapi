@@ -117,7 +117,7 @@ abstract class Handler
      * @param   Model  $model  the model to load relations of
      * @return  void
      */
-    protected function loadRelatedModels(Model $model) {
+    protected function loadRelatedModels(ModelInterface $model) {
         // get the relations to load
         $relations = $this->exposedRelationsFromRequest($model);
 
@@ -144,7 +144,7 @@ abstract class Handler
         // if no relations are to be included by request
         if (count($this->request->include) == 0) {
             // and if we have a model
-            if ($model !== null && $model instanceof Model) {
+            if ($model !== null && $model instanceof ModelInterface) {
                 // then use the relations exposed by default
                 $exposedRelations = array_intersect($exposedRelations, $model->defaultExposedRelations());
                 $model->setExposedRelations($exposedRelations);
@@ -154,7 +154,7 @@ abstract class Handler
         }
 
         $exposedRelations = array_intersect($exposedRelations, $this->request->include);
-        if ($model !== null && $model instanceof Model) {
+        if ($model !== null && $model instanceof ModelInterface) {
             $model->setExposedRelations($exposedRelations);
         }
 
@@ -174,7 +174,7 @@ abstract class Handler
     /**
      * Iterate through result set to fetch the requested resources to include.
      *
-     * @param  Illuminate\Database\Eloquent\Collection|JsonApi\Model $models
+     * @param  Illuminate\Database\Eloquent\Collection|JsonApi\ModelInterface $models
      * @return array
      */
     protected function getIncludedModels($models)
@@ -277,7 +277,7 @@ abstract class Handler
         // if we did a put request, we need to ensure that the model wasn't
         // changed in other ways than those specified by the request
         //     Ref: http://jsonapi.org/format/#crud-updating-responses-200
-        if ($method === 'PUT' && $model instanceof Model) {
+        if ($method === 'PUT' && $model instanceof ModelInterface) {
             // check if the model has been changed
             if ($model->isChanged()) {
                 // return our response as if there was a GET request
@@ -373,8 +373,8 @@ abstract class Handler
      * Function to handle sorting requests.
      *
      * @param  array $cols list of column names to sort on
-     * @param  EchoIt\JsonApi\Model $model
-     * @return EchoIt\JsonApi\Model
+     * @param  EchoIt\JsonApi\ModelInterface $model
+     * @return EchoIt\JsonApi\ModelInterface
      */
     protected function handleSortRequest($cols, $model)
     {
@@ -439,7 +439,7 @@ abstract class Handler
      * Function to handle pagination requests.
      *
      * @param  EchoIt\JsonApi\Request $request
-     * @param  EchoIt\JsonApi\Model $model
+     * @param  EchoIt\JsonApi\ModelInterface $model
      * @param integer $total the total number of records
      * @return Illuminate\Pagination\LengthAwarePaginator
      */
@@ -472,8 +472,8 @@ abstract class Handler
      * Function to handle filtering requests.
      *
      * @param  array $filters key=>value pairs of column and value to filter on
-     * @param  EchoIt\JsonApi\Model $model
-     * @return EchoIt\JsonApi\Model
+     * @param  EchoIt\JsonApi\ModelInterface $model
+     * @return EchoIt\JsonApi\ModelInterface
      */
     protected function handleFilterRequest($filters, $model)
     {
@@ -488,8 +488,8 @@ abstract class Handler
      * Must be called explicitly in handleGet function.
      *
      * @param  EchoIt\JsonApi\Request $request
-     * @param  EchoIt\JsonApi\Model $model
-     * @return EchoIt\JsonApi\Model|Illuminate\Pagination\LengthAwarePaginator
+     * @param  EchoIt\JsonApi\ModelInterface $model
+     * @return EchoIt\JsonApi\ModelInterface|Illuminate\Pagination\LengthAwarePaginator
      */
     protected function handleGetDefault(Request $request, $model)
     {
@@ -531,8 +531,8 @@ abstract class Handler
      * Must be called explicitly in handlePost function.
      *
      * @param  EchoIt\JsonApi\Request $request
-     * @param  EchoIt\JsonApi\Model $model
-     * @return EchoIt\JsonApi\Model
+     * @param  EchoIt\JsonApi\ModelInterface $model
+     * @return EchoIt\JsonApi\ModelInterface
      */
     public function handlePostDefault(Request $request, $model)
     {
@@ -555,8 +555,8 @@ abstract class Handler
      * Must be called explicitly in handlePut function.
      *
      * @param  EchoIt\JsonApi\Request $request
-     * @param  EchoIt\JsonApi\Model $model
-     * @return EchoIt\JsonApi\Model
+     * @param  EchoIt\JsonApi\ModelInterface $model
+     * @return EchoIt\JsonApi\ModelInterface
      */
     public function handlePutDefault(Request $request, $model)
     {
@@ -610,8 +610,8 @@ abstract class Handler
      * Must be called explicitly in handleDelete function.
      *
      * @param  EchoIt\JsonApi\Request $request
-     * @param  EchoIt\JsonApi\Model $model
-     * @return EchoIt\JsonApi\Model
+     * @param  EchoIt\JsonApi\ModelInterface $model
+     * @return EchoIt\JsonApi\ModelInterface
      */
     public function handleDeleteDefault(Request $request, $model)
     {
