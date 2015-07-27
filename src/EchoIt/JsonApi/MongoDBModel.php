@@ -11,7 +11,7 @@ use Jenssegers\Mongodb\Model as Model;
  *
  * @author Ronni Egeriis Persson <ronni@egeriis.me>
  */
-class Model extends Model
+class MongoDBModel extends Model
 {
     /**
      * Let's guard these fields per default
