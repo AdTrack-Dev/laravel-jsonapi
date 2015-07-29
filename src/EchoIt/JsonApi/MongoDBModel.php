@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\Relations\Pivot as Pivot;
-use Jenssegers\Mongodb\Model as Model;
+use \Jenssegers\Mongodb\Model as Model;
 
 /**
  * This class is used to extend models from, that will be exposed through
