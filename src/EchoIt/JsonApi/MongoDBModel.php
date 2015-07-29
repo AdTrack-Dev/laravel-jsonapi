@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model as BaseModel;
 use Illuminate\Database\Eloquent\Relations\Pivot as Pivot;
-use \Jenssegers\Mongodb\Model;
+use \Jenssegers\Mongodb\Model as MongoModel;
 
 /**
  * This class is used to extend models from, that will be exposed through
@@ -11,7 +11,7 @@ use \Jenssegers\Mongodb\Model;
  *
  * @author Ronni Egeriis Persson <ronni@egeriis.me>
  */
-class MongoDBModel extends Model implements ModelInterface
+class MongoDBModel extends MongoModel implements ModelInterface
 {
     /**
      * Let's guard these fields per default
